@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import { Card, CardHeader, CardContent } from 'shadcn/ui/card';
+import { Button } from 'shadcn/ui/button';
+
+const SeaPmaxQuiz = () => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+
+  const questions = [
+    {
+      question: 'Quelle est la définition de SEA Pmax ?',
+      options: [
+        'Une campagne publicitaire manuelle sur Google',
+        'Une campagne publicitaire automatisée sur l'ensemble des plateformes Google',
+        'Une campagne publicitaire optimisée pour les réseaux sociaux',
+        'Une solution publicitaire intégrée pour les agences immobilières'
+      ],
+      correctAnswer: 1
+    },
+    {
+      question: 'Quels sont les principaux avantages de SEA Pmax ?',
+      options: [
+        'Couverture sur un seul canal Google',
+        'Ciblage limité à une seule étape du parcours d'achat',
+        'Absence d'optimisation automatique des campagnes',
+        'Présence sur tous les canaux Google et ciblage intelligent des prospects'
+      ],
+      correctAnswer: 3
+    },
+    // Ajoutez d'autres questions ici...
+  ];
+
+  const handleAnswerClick = (index) => {
+    if (index === questions[currentQuestion].correctAnswer) {
+      setScore(score + 1);
+    }
+    setCurrentQuestion(currentQuestion + 1);
+  };
+
+  return (
+    <Card>
+      <CardHeader>Quiz interactif SEA Pmax</CardHeader>
+      <CardContent>
+        {currentQuestion < questions.length ? (
+          <>
+            <h3>{questions[currentQuestion].question}</h3>
+            {questions[currentQuestion].options.map((option, index) => (
+              <Button key={index} onClick={() => handleAnswerClick(index)}>
+                {option}
+              </Button>
+            ))}
+          </>
+        ) : (
+          <div>
+            <h3>Votre score final : {score}/{questions.length}</h3>
+            <p>Merci d'avoir participé !</p>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
+
+export default SeaPmaxQuiz;
